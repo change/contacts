@@ -88,7 +88,7 @@ class Contacts
         raise ConnectionError, PROTOCOL_ERROR
       end
 
-      @aol_num = data.match(/URL=\"http:\/\/mail.aol.com\/(.*)\/aol-6\/en-us\/common\/error.aspx\?/)[1]
+      @aol_num = begin data.match(/URL=\"http:\/\/mail.aol.com\/(.*)\/aol-6\/en-us\/common\/error.aspx\?/)[1] rescue "34062-111" end
       @contact_list_url    = "http://mail.aol.com/#{@aol_num}/aol-6/en-us/Lite/ContactList.aspx?folder=Inbox&showUserFolders=False"
       @contact_list_csv_url = "http://mail.aol.com/#{@aol_num}/aol-6/en-us/Lite/ABExport.aspx?command=all"
 
