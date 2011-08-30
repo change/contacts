@@ -9,4 +9,4 @@ require 'hotmail'
 require 'yahoo'
 require 'plaxo'
 require 'aol'
-require 'mailru'
+#require 'mailru' => borked!

@@ -216,6 +216,8 @@ class Contacts
         a + t[1].new(login, password, options).contacts
       rescue AuthenticationError
         a
+      rescue ConnectionError
+        a        
       end
     end.uniq
   end

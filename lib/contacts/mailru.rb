@@ -22,6 +22,8 @@ class Contacts
         raise AuthenticationError, "Username and password do not match"
       elsif cookies == "" or data == ""
         raise ConnectionError, PROTOCOL_ERROR
+      elsif resp.code_type != Net::HTTPOK
+        raise ConnectionError, resp.code_type
       end
 
       data, resp, cookies, forward = get(login_token_link(data), login_cookies.join(';'))
@@ -30,7 +32,7 @@ class Contacts
     def contacts
       postdata = "confirm=1&abtype=6"
       data, resp, cookies, forward = post(ADDRESS_BOOK_URL, postdata, login_cookies.join(';'))
-
+      debugger;1
       @contacts = []
       CSV.parse(data) do |row|
         @contacts << [row[0], row[4]] unless header_row?(row)
@@ -43,7 +45,6 @@ class Contacts
       true
     end
 
-    private
     def login_token_link(data)
       data.match(/url=(.+)\">/)[1]
     end

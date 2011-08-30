@@ -1,0 +1,50 @@
+gmail:
+  username: 'test.change.org@gmail.com'
+  password: 'change.org'
+  contacts:
+    -
+      name: "Ben Rattray"
+      email_address: "ben@change.org"
+    -
+      name: "Mark Dimas"
+      email_address: "mark@change.org"
+yahoo:
+  username: 'test_change_org@yahoo.com'
+  password: 'change.org'
+  contacts:
+    -
+      name: "Rattray, Ben"
+      email_address: "ben@change.org"
+    -
+      name: "Dimas, Mark"
+      email_address: "mark@change.org"
+hotmail:
+  username: "test.change.org@hotmail.com"
+  password: "letme1n"
+  contacts:
+    -
+      name: "Alain Bloch"
+      email_address: "alain@change.org"
+    -
+      name: "Rex Chung"
+      email_address: "rex@change.org"
+aol:
+  username: "test.change.org@aol.com"
+  password: "letme1n"
+  contacts:
+    -
+      name: "Alain Bloch"
+      email_address: "alain@change.org"
+    -
+      name: "Rex Chung"
+      email_address: "rex@change.org"
+mailru:
+  username: "test.change.org@mail.ru"
+  password: "letme1n"
+  contacts:
+    -
+      name: "Alain Bloch"
+      email_address: "alain@change.org"
+    -
+      name: "Rex Chung"
+      email_address: "rex@change.org"
