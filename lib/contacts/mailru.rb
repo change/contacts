@@ -9,7 +9,7 @@ class Contacts
 
     def real_connect
       username = login
-      
+
       postdata =  "Login=%s&Domain=%s&Password=%s" % [
         CGI.escape(username),
         CGI.escape(domain_param(username)),
@@ -32,7 +32,7 @@ class Contacts
     def contacts
       postdata = "confirm=1&abtype=6"
       data, resp, cookies, forward = post(ADDRESS_BOOK_URL, postdata, login_cookies.join(';'))
-      debugger;1
+
       @contacts = []
       CSV.parse(data) do |row|
         @contacts << [row[0], row[4]] unless header_row?(row)
