@@ -74,7 +74,7 @@ class Contacts
           go = false
           url = URI.parse(get_contact_list_url(index))
           http = open_http(url)
-          resp, data = http.get(get_contact_list_url(index), "Cookie" => @cookies)
+          resp = http.get(get_contact_list_url(index), "Cookie" => @cookies)
           
           email_match_text_beginning = Regexp.escape("http://m.mail.live.com/?rru=compose&amp;to=")
           email_match_text_end = Regexp.escape("&amp;ru=")
