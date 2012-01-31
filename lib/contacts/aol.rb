@@ -137,7 +137,9 @@ class Contacts
     def parse(data, options={})
       begin
         @contacts = []
-        FasterCSV.parse(data) do |person|
+        # Ruby 1.9 CSV is FasterCSV
+        csv_class = (RUBY_VERSION.split(/\./)[1] == '8') ? FasterCSV : CSV
+        csv_class.parse(data) do |person|
           @contacts << ["#{person[0]} #{person[1]}", person[4]] if person[4] && !person[4].empty?
         end
         @contacts

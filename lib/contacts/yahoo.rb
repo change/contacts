@@ -46,9 +46,10 @@ class Contacts
         # first, get the addressbook site with the new crumb parameter
         url = URI.parse(address_book_url)
         http = open_http(url)
-        resp, data = http.get("#{url.path}?#{url.query}",
+        resp = http.get("#{url.path}?#{url.query}",
           "Cookie" => @cookies
         )
+        data = resp.body
 
         if resp.code_type != Net::HTTPOK
           raise ConnectionError, self.class.const_get(:PROTOCOL_ERROR)
@@ -59,11 +60,12 @@ class Contacts
         # now proceed with the new ".crumb" parameter to get the csv data
         url = URI.parse(contact_list_url.sub("_crumb=crumb","_crumb=#{crumb}").sub("time", Time.now.to_f.to_s.sub(".","")[0...-2]))
         http = open_http(url)
-        resp, more_data = http.get("#{url.path}?#{url.query}",
+        resp = http.get("#{url.path}?#{url.query}",
           "Cookie" => @cookies,
           "X-Requested-With" => "XMLHttpRequest",
           "Referer" => address_book_url
         )
+        more_data = resp.body
 
         if resp.code_type != Net::HTTPOK
         raise ConnectionError, self.class.const_get(:PROTOCOL_ERROR)
@@ -79,7 +81,7 @@ class Contacts
             # now proceed with the new ".crumb" parameter to get the csv data
             url = URI.parse(contact_list_url.sub("bucket=1","bucket=#{i+1}").sub("_crumb=crumb","_crumb=#{crumb}").sub("time", Time.now.to_f.to_s.sub(".","")[0...-2]))
             http = open_http(url)
-            resp, more_data = http.get("#{url.path}?#{url.query}",
+            resp = http.get("#{url.path}?#{url.query}",
               "Cookie" => @cookies,
               "X-Requested-With" => "XMLHttpRequest",
               "Referer" => address_book_url
@@ -89,7 +91,7 @@ class Contacts
             raise ConnectionError, self.class.const_get(:PROTOCOL_ERROR)
             end
                         
-            parse more_data
+            parse resp.body
           end
         end
         
