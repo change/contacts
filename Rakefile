@@ -1,8 +1,8 @@
 require 'rubygems'
 require 'rake'
 require 'rake/testtask'
-require 'rake/rdoctask'
-require 'rake/gempackagetask'
+require 'rdoc/task'
+require 'rubygems/package_task'
 require 'rake/contrib/rubyforgepublisher'
 require './lib/contacts'
 
@@ -76,7 +76,7 @@ spec = Gem::Specification.new do |s|
   s.homepage = "http://rubyforge.org/projects/contacts"
 end
 
-Rake::GemPackageTask.new(spec) do |pkg|
+Gem::PackageTask.new(spec) do |pkg|
   pkg.need_zip = true
   pkg.need_tar = true
 end
