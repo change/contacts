@@ -17,12 +17,22 @@ class Contacts
       feed = @client.get(CONTACTS_FEED).to_xml
       
       @contacts = feed.elements.to_a('entry').collect do |entry|
-        title, email = entry.elements['title'].text, nil
-        entry.elements.each('gd:email') do |e|
-          email = e.attribute('address').value if e.attribute('primary')
+        name  = entry.elements["title"].text
+
+        emails = []
+
+        entry.elements.each("gd:email") do |e|
+          emails << { :address => e.attribute("address").value, :primary => e.attribute("primary") }
         end
-        [title, email] unless email.nil?
+
+        return if emails.empty?
+
+        # Favor email addresses marked as "primary"
+        email = emails.find { |e| e[:primary] } || emails.first
+
+        [name, email[:address]]
       end
+
       @contacts.compact!
     rescue GData::Client::AuthorizationError => e
       raise AuthenticationError, "Username or password are incorrect"
