@@ -25,7 +25,7 @@ class Contacts
           emails << { :address => e.attribute("address").value, :primary => e.attribute("primary") }
         end
 
-        return if emails.empty?
+        next if emails.empty?
 
         # Favor email addresses marked as "primary"
         email = emails.find { |e| e[:primary] } || emails.first
